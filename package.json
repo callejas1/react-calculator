@@ -2,11 +2,8 @@
   "name": "react-calculator",
   "version": "1.0.0",
   "description": "Quiz Calculator",
-  "main": "index.js",
+  "main": "server.js",
   "type": "module",
-  "engines": {
-    "node": "14.x"
-  },
   "scripts": {
     "start": "node backend/server",
     "server": "nodemon backend/server",
@@ -14,7 +11,7 @@
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "data:import": "node backend/seeder",
     "data:destroy": "node backend/seeder -d",
-    "heroku-postbuild": "NPM _CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build --prefix frontend"
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build --prefix frontend"
   },
   "repository": {
     "type": "git",
