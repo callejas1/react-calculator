@@ -65,7 +65,7 @@ const updateCount = asyncHandler(async (req, res) => {
 
   if (user) {
     user.answers.push(req.body.answers)
-    user.numberOfAttempts = req.body.numberOfAttempts
+    user.numberOfAttempts += req.body.numberOfAttempts
 
     const updatedUser = await user.save()
 

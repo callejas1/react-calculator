@@ -19,8 +19,10 @@ const Answer = ({ displayStyle, id }) => {
   
   const dispatch = useDispatch()
 
+
   const submitHandler = (e) => {
     e.preventDefault()
+    console.log(userInfo.numberOfAttempts)
     const input = Number(userInput)
     const correctAnswer = calculation.calculation.correctAnswer
     const chosenCalculation = id
