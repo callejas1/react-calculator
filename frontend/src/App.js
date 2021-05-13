@@ -5,11 +5,13 @@ import HomeScreen from './screens/HomeScreen';
 import LoginScreen from './screens/LoginScreen';
 import RegisterScreen from './screens/RegisterScreen';
 import FailedScreen from './screens/FailedScreen';
+import PassedScreen from './screens/PassedScreen';
 
 function App() {
 
   return (
     <>
+    <Route path="/passed" exact component={PassedScreen}/>
     <Route path="/failed" exact component={FailedScreen}/>
       <Route path="/login" exact>
         <div className="App">

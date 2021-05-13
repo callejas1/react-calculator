@@ -9,9 +9,7 @@ import { attemptsTracker } from '../actions/userActions'
 const Answer = ({ displayStyle, id }) => {
   const [userInput, setUserInput] = useState('')
   const [message, setMessage] = useState('')
-  const [failed, setFailed] = useState('')
-  const [passed, setPassed] = useState('')
-  const [attemptCount, setAttemptCount] = useState(0)
+  const [attemptCount, setAttemptCount] = useState(1)
   
   const userLogin = useSelector(state => state.userLogin)
   const { userInfo } = userLogin
@@ -30,11 +28,11 @@ const Answer = ({ displayStyle, id }) => {
     if(userInput.length <= 0) {
       setMessage('An answer must be provided to continue')
     } else if(input === correctAnswer) {
-      setPassed('Correct! ✅')
-      setAttemptCount(attemptCount + 1)
+      document.location.href = "/passed"
     } else if (input !== correctAnswer){
-      setFailed('Incorrect ❌')
       setAttemptCount(attemptCount + 1)
+      document.location.href = "/failed"
+      dispatch(attemptsTracker(userInfo._id, { userInput, chosenCalculation }, attemptCount))
     }
   }
 
@@ -49,7 +47,6 @@ const Answer = ({ displayStyle, id }) => {
       <button onClick={submitHandler}>Submit</button>
       {loading ? <Loader/> : error && <Message variant="danger">{error}</Message>}
       {message && userInput.length <= 0 && <Message variant="dark">{message}</Message>}
-      {passed ? <Message variant="dark">{passed}</Message> : failed && <Message variant="dark">{failed}</Message>}  
     </div>
   )
 }

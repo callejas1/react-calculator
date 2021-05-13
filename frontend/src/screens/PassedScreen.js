@@ -1,14 +1,13 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-
-const FailedScreen = () => {
+const PassedScreen = () => {
   return (
     <div className="failed-passed-screen">
-      <img src="./bad-math.gif" alt="error screen"/>
+      <img src="./thank-you-page.jpeg" alt="thank you gif"/>
       <Link to="/">Return to homepage ⏎</Link>
     </div>
   )
 }
 
-export default FailedScreen
+export default PassedScreen

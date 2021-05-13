@@ -225,15 +225,17 @@ a {
   }
 }
 
-.error-screen {
+.failed-passed-screen {
   display: flex;
+  align-content: center;
   align-items: center;
   flex-direction: column;
-  height: 80vh;
+  height: 100vh;
 }
 
-.error-screen img {
-  width: 45em;
+.failed-passed-screen img {
+  width: 50em;
+  padding: 3em;
 }
 
 
