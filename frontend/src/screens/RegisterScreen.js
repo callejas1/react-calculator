@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import Navbar from '../components/Navbar'
@@ -6,7 +6,7 @@ import Loader from '../components/Loader'
 import Message from '../components/Message'
 import { register } from '../actions/userActions'
 
-const RegisterScreen = () => {
+const RegisterScreen = ({ location, history }) => {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -15,6 +15,9 @@ const RegisterScreen = () => {
 
   const userRegister = useSelector((state) => state.userRegister)
   const { loading, error } = userRegister
+
+  const userLogin = useSelector((state) => state.userLogin)
+  const { userInfo } = userLogin
 
   const dispatch = useDispatch()
 
@@ -26,6 +29,14 @@ const RegisterScreen = () => {
       dispatch(register(name, email, password))
     }
   }
+
+  const redirect = location.search ? location.search.split('=')[1] : '/'
+
+  useEffect(() => {
+    if (userInfo) {
+      history.push(redirect)
+    }
+  }, [userInfo, history, redirect])
 
   return (
     <div className="form-control">
