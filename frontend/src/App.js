@@ -10,28 +10,14 @@ import PassedScreen from './screens/PassedScreen';
 function App() {
 
   return (
-    <>
-    <Route path="/passed" exact component={PassedScreen}/>
-    <Route path="/failed" exact component={FailedScreen}/>
-      <Route path="/login" exact>
-        <div className="App">
-          <Logo/>
-          <LoginScreen/>
-        </div>
-      </Route>
-      <Route path="/register" exact>
-        <div className="App">
-          <Logo/>
-          <RegisterScreen/>
-        </div>
-      </Route>
-      <Route path="/" exact>
-        <div className="App">
-          <Logo/>
-          <HomeScreen/>
-        </div>
-      </Route>
-    </>
+    <div className="App">
+      <Route path="/passed" component={PassedScreen}/>
+      <Route path="/failed" component={FailedScreen}/>
+      <Logo/>
+      <Route path="/login" component={LoginScreen}/>
+      <Route path="/register" component={RegisterScreen}/>
+      <Route path="/" component={HomeScreen} exact/>
+    </div>
   );
 }
 
