@@ -16,10 +16,6 @@ app.use(express.json())
 app.use('/api/users', userRoutes)
 app.use('/api/calculations', calculationRoutes)
 
-app.get('/', (req, res) => {
-  res.send('API is running...')
-})
-
 const __dirname = path.resolve()
 
 app.use('/uploads', express.static(path.join(__dirname, '/uploads')))

@@ -23,7 +23,8 @@ const userSchema = mongoose.Schema(
     },
     answers: [{ 
       userInput: { type: String, required: true },
-      chosenCalculation: { type: String, required: true }
+      chosenCalculation: { type: String, required: true },
+      isCorrect: { type: Boolean, required: true }
     }]
   },
   {

@@ -66,7 +66,6 @@ const updateCount = asyncHandler(async (req, res) => {
   if (user) {
     user.answers.push(req.body.answers)
     user.numberOfAttempts += req.body.numberOfAttempts
-
     const updatedUser = await user.save()
 
     res.json({
@@ -79,5 +78,26 @@ const updateCount = asyncHandler(async (req, res) => {
   }
 })
 
+// @desc Get user details
+// @route GET /api/users/:id
+// @access Private
+const getUserInfo = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.params.id)
 
-export { authUser, registerUser, updateCount }
+  if(user){
+    res.json({
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+      numberOfAttempts: user.numberOfAttempts,
+      answers: user.answers
+    })
+  } else {
+    res.status(404)
+    throw new Error('User not found')
+  }
+
+})
+
+
+export { authUser, getUserInfo, registerUser, updateCount }
