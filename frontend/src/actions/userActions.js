@@ -9,7 +9,11 @@ import {
   USER_REGISTER_SUCCESS,
   USER_ATTEMPT_REQUEST,
   USER_ATTEMPT_SUCCESS,
-  USER_ATTEMPT_FAIL
+  USER_ATTEMPT_FAIL,
+  USER_DETAILS_REQUEST,
+  USER_DETAILS_SUCCESS,
+  USER_DETAILS_FAIL,
+  USER_DETAILS_RESET
 } from '../constants/userConstants'
 import { config } from '../utils/config'
 
@@ -45,7 +49,7 @@ export const login = (email, password) => async (dispatch) => {
 export const logout = () => (dispatch) => {
   localStorage.removeItem('userInfo')
   dispatch({ type: USER_LOGOUT })
-  // dispatch({ type: USER_DETAILS_RESET })
+  dispatch({ type: USER_DETAILS_RESET })
 
   document.location.href = '/login'
 }
@@ -55,6 +59,12 @@ export const register = (name, email, password) => async (dispatch) => {
     dispatch({
       type: USER_REGISTER_REQUEST,
     })
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }
 
     const { data } = await axios.post(
       '/api/users',
@@ -83,7 +93,7 @@ export const register = (name, email, password) => async (dispatch) => {
   }
 }
 
-export const attemptsTracker = (id, answers, numberOfAttempts) => async (dispatch) => {
+export const attemptTracker = (id, answers, numberOfAttempts) => async (dispatch) => {
   try {
     dispatch({
       type: USER_ATTEMPT_REQUEST,
@@ -91,7 +101,7 @@ export const attemptsTracker = (id, answers, numberOfAttempts) => async (dispatc
 
     const { data } = await axios.post(
       '/api/users/attempts',
-      { id, answers, numberOfAttempts },
+      { id, answers, numberOfAttempts }, 
       config
     )
 
@@ -108,6 +118,43 @@ export const attemptsTracker = (id, answers, numberOfAttempts) => async (dispatc
         error.response && error.response.data.message
           ? error.response.data.message
           : error.message,
+    })
+  }
+}
+
+export const getUserDetails = (id) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: USER_DETAILS_REQUEST,
+    })
+
+    const {
+      userLogin: { userInfo },
+    } = getState()
+
+    const config1 = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    }
+
+    const { data } = await axios.get(`/api/users/${id}`, config1)
+
+    dispatch({
+      type: USER_DETAILS_SUCCESS,
+      payload: data,
+    })
+  } catch (error) {
+    const message =
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message
+    if (message === 'Not authorized, token failed') {
+      dispatch(logout())
+    }
+    dispatch({
+      type: USER_DETAILS_FAIL,
+      payload: message,
     })
   }
 }
