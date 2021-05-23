@@ -10,18 +10,19 @@ const Answer = ({ history, id }) => {
   const [userInput, setUserInput] = useState('')
   const [message, setMessage] = useState('')
   const [attemptCount, setAttemptCount] = useState(1)
+  const [failedAnswers, setFailedAnswers] = useState([])
   
   const userLogin = useSelector(state => state.userLogin)
   const { userInfo } = userLogin
-  
-  const userDetails = useSelector(state => state.userDetails)
-  const { answers } = userDetails
 
   const calculationDetails = useSelector(state => state.calculationDetails)
   const { loading, error, calculation } = calculationDetails
   
-  const dispatch = useDispatch()
+  const userDetails = useSelector(state => state.userDetails)
+  const { user } = userDetails
+  const answers = user.answers
 
+  const dispatch = useDispatch()
 
   const submitHandler = (e) => {
     e.preventDefault()
@@ -45,9 +46,6 @@ const Answer = ({ history, id }) => {
       dispatch(attemptTracker(userInfo._id, { userInput, chosenCalculation, isCorrect }, attemptCount))
       history.push("/failed")
     }
-
-    dispatch(getUserDetails(userInfo._id))
-
   }
 
   useEffect(() => {
@@ -56,21 +54,24 @@ const Answer = ({ history, id }) => {
     // get user details to check how many failed attempts user has
     dispatch(getUserDetails(userInfo._id))
     if(answers && answers.length > 0){
-      answers
-      .filter(answer => answer.isCorrect === false)
-      .forEach(answer => alert(answer.isCorrect))
-    }
+      const incorrectAnswers = answers.filter(answer => answer.isCorrect === false)
+      setFailedAnswers(incorrectAnswers)
+    }  
 
-  }, [dispatch, id, userInfo._id, answers])
+  }, [dispatch, id, userInfo._id])
 
   return (
     <div className="answer-input">
       {loading ? <Loader/> : error ? <Message variant="danger">{error}</Message> : message && userInput.length <= 0 && (
       <Message variant="dark">{message}</Message>
       )}
-      <label htmlFor="text">Enter your answer</label>
-      <input type="number" placeholder="Guess" onChange={(e) => setUserInput(e.target.value)}/>
-      <button onClick={submitHandler}>Submit</button>
+      {answers && failedAnswers.length < 5 ? (
+        <>
+        <label htmlFor="text">Enter your answer</label>
+        <input type="number" placeholder="Guess" onChange={(e) => setUserInput(e.target.value)}/>
+        <button onClick={submitHandler}>Submit</button>
+        </>
+      ) : <Message variant="dark">You've reached the maximum failed attempts</Message>}
     </div>
   )
 }

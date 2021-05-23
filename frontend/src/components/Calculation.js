@@ -4,7 +4,7 @@ import Answer from './Answer'
 const Calculation = ({ calc, id, history }) => {
   const [displayStyle, setDisplayStyle] = useState(false)
   const [selectedQuestion, setSelectedQuestion] = useState('')
-
+  
   const guessInputHandler = () => {
     setDisplayStyle(true)
     setSelectedQuestion(id)

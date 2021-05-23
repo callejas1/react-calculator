@@ -20,7 +20,6 @@ const HomeScreen = ({ history }) => {
   const calculationHandler = () => {
     dispatch(listCalculations())
   } 
-
   
   return (
     <>  
