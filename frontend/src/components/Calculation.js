@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Answer from './Answer'
 
-const Calculation = ({ calc, id }) => {
+const Calculation = ({ calc, id, history }) => {
   const [displayStyle, setDisplayStyle] = useState(false)
   const [selectedQuestion, setSelectedQuestion] = useState('')
 
@@ -12,13 +12,11 @@ const Calculation = ({ calc, id }) => {
       setDisplayStyle(false)
     }
   }
-
-  const changeDisplayStyle = displayStyle ? "block" : "none"
   
   return (
     <>
       <button className="calculation-array" onClick={guessInputHandler}>{calc}</button>
-      <Answer displayStyle={changeDisplayStyle} id={selectedQuestion} />
+      {displayStyle && <Answer id={selectedQuestion} history={history}/>}
     </>
   )
 }
