@@ -126,7 +126,7 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 - mongoose: For database structuring with mongodb
 - bcryptjs: For hashing user passwords
 - jsonwebtoken: JWT implementation library
-- dotenv: 
+- dotenv: Loads environment variables from a .env file into process.env
 - nodemon: To run server file on every new change
 - concurrently: To run both FE + BE server at the same time
 
