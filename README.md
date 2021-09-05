@@ -31,63 +31,26 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 .
 ├── backend                            # BACKEND
-│   ├── config                         # DB connection
-│   │   └── db.js   
+│   ├── config                         # DB connection   
 │   ├── controllers                    # Routes controllers
-│   │   ├── calculationController.js
-│   │   └── userController.js
 │   ├── data                           # Test data
-│   │   ├── calculations.js
-│   │   └── users.js
 │   ├── middleware
 │   ├── models                         # DB models
-│   │   ├── calculationModel.js
-│   │   └── userModel.js
 │   ├── routes                         # API routes
-│   │   ├── calculationRoutes.js
-│   │   └── userRoutes.js
 │   ├── utils                          # JSON web token
-│   │   └── generateToken.js
 │   ├── seeder.js                      # DB seeder
 │   └── server.js                      # Server file
 ├── frontend                           # FRONTEND
 │   ├── package.json
 │   ├── package-lock.json
 │   ├── public
-│   │   ├── algo.png
-│   │   ├── algorhythm.jpeg
-│   │   ├── bad-math.gif
-│   │   ├── favicon.ico
-│   │   ├── index.html
-│   │   ├── robots.txt
-│   │   └── thank-you-page.jpeg
 │   └── src
 │       ├── actions                    # REDUX Actions                       
-│       │   ├── calculationActions.js
-│       │   └── userActions.js
 │       ├── components                 # Reusable Components
-│       │   ├── Answer.js
-│       │   ├── Calculation.js
-│       │   ├── Loader.js
-│       │   ├── Logo.js
-│       │   ├── Message.js
-│       │   ├── Navbar.js
-│       │   └── Welcome.js
 │       ├── constants                  # REDUX Constants                       
-│       │   ├── calculationConstants.js
-│       │   └── userConstants.js
 │       ├── reducers                   # REDUX Reducers                       
-│       │   ├── calculationReducers.js
-│       │   └── userReducers.js
 │       ├── screens                    # App Screens
-│       │   ├── ErrorScreen.js
-│       │   ├── FailedScreen.js
-│       │   ├── HomeScreen.js
-│       │   ├── LoginScreen.js
-│       │   ├── PassedScreen.js
-│       │   └── RegisterScreen.js
 │       ├── utils                      # Config for API call 
-│       │   └── config.js
 │       ├── App.css
 │       ├── App.js
 │       ├── index.css
@@ -149,10 +112,7 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 │ │
 │ ├── HomeScreen
 │ │   ├── Navbar
-│ │   │   ├── Home
-│ │   │   └── Sign in/Logout
-│ │   ├── Calculation
-          └── Answer
+│ │   └──Calculation
 ```
 
 #### Api Calls
